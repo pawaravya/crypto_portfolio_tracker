@@ -6,4 +6,6 @@ class Appurl {
   }
 
   static String getAllCoinsListUrl = _getUrl("coins/list");
+  static String fetchPrizes = _getUrl("simple/") ;
+
 }

@@ -67,7 +67,7 @@ class AppSharedPreferences {
   }
 
   Future<List<Coin>> loadCoinsFromPortFolio() async {
-    final jsonStr = getValue<String>(_coinListKey);
+    final jsonStr =await  getValue<String>(_coinListKey);
     if (jsonStr == null) return [];
     final List decoded = jsonDecode(jsonStr);
     return decoded.map((e) => Coin.fromJson(e)).toList();

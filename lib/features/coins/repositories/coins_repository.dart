@@ -1,5 +1,6 @@
 import 'package:crypto_portfolio_tracker/core/constants/AppUrl.dart';
 import 'package:crypto_portfolio_tracker/core/services/network_api_services.dart';
+import 'package:crypto_portfolio_tracker/features/coins/model/coins_model.dart';
 import 'package:flutter/material.dart';
 
 class CoinsRepository {
@@ -11,8 +12,14 @@ class CoinsRepository {
 
   Future<dynamic> fetchAllCoins() async {
     return await _networkAPIServices.generateGetAPIResponse(
-      
       Appurl.getAllCoinsListUrl,
+    );
+  }
+
+  Future<dynamic> fetchPrizesForCoin(List<Coin> coinsList) async {
+    final ids = coinsList.map((c) => c.id).join(",");
+    return await _networkAPIServices.generateGetAPIResponse(
+      "${Appurl.fetchPrizes}price?ids=$ids&vs_currencies=usd",
     );
   }
 }

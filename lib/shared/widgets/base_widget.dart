@@ -55,38 +55,7 @@ class _BaseScreenState extends State<BaseWidget> {
               backgroundColor: Colors.grey.shade200,
               body: Padding(
                 padding: EdgeInsets.symmetric(horizontal: widget.sidePadding),
-                child: Stack(
-                  children: [
-                    PopScope(
-                      onPopInvokedWithResult: (didPop, result) {},
-                      child: Opacity(
-                        opacity: isConnected
-                            ? 1
-                            : 0, // Make the content invisible when disconnected
-                        child: IgnorePointer(
-                          ignoring:
-                              !isConnected, // Disable interaction when disconnected
-                          child: Stack(children: [widget.screen]),
-                        ),
-                      ),
-                    ),
-                    // The "No Internet" overlay (displayed when disconnected)
-                    if (!isConnected)
-                      Positioned.fill(
-                        child: CommonEmptyState(
-                          onTapButton: () async {
-                            await InternetConnectionHelper()
-                                .checkInternetStatus();
-                          },
-                          stateScreenEmoji: ImageConstants.noInternetLottie,
-                          stateScreenHeading: "No Internet Connection",
-                          buttonText: 'RETRY',
-                          stateScreenSubHeading:
-                              "Please Check your Network and try again after sometime.",
-                        ),
-                      ),
-                  ],
-                ),
+                child: widget.screen
               ),
             ),
           );

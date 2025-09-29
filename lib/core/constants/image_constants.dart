@@ -21,6 +21,6 @@ class ImageConstants {
             static const String tabContactsIcon = "assets/images/tab_icons/tab_contacts.svg";
       static const String tabHomeIcon = "assets/images/tab_icons/tab_home_icon.svg";
       static const String tabProfileIcon = "assets/images/tab_icons/tab_profile.svg";
-      static const String noProductsFoundLottieIcon = "assets/lotties/no_products found_lottie.json";
+      static const String noCoinsFoundLottieIcon = "assets/lotties/no_products found_lottie.json";
 
 }

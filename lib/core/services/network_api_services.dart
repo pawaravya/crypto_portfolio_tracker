@@ -68,7 +68,10 @@ class NetworkAPIServices extends BaseApiServices {
 
   dynamic _handleNoInternetError() {
     AppLogger.showErrorLogs('No internet connection.');
-    AppViewUtils.showTopSnackbar(Get.context! , StringConstants.noInternetSubText);
+    if(Get.context != null ){
+    AppViewUtils.showTopSnackbar(Get.context!, StringConstants.noInternetSubText);
+
+    }
     return {'error': 'No internet connection'};
   }
 

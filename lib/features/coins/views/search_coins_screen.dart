@@ -1,15 +1,17 @@
+import 'package:crypto_portfolio_tracker/shared/widgets/app_text.dart';
+import 'package:crypto_portfolio_tracker/shared/widgets/app_view_utils.dart';
+import 'package:crypto_portfolio_tracker/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:crypto_portfolio_tracker/features/coins/view_models/coins_view_models.dart';
-import 'package:crypto_portfolio_tracker/features/coins/views/coid_card.dart';
+import 'package:crypto_portfolio_tracker/features/coins/views/coin_selection_card.dart';
 import 'package:crypto_portfolio_tracker/features/coins/views/coin_card_shimmer.dart';
 import 'package:crypto_portfolio_tracker/features/coins/model/coins_model.dart';
 import 'package:crypto_portfolio_tracker/shared/widgets/base_widget.dart';
 import 'package:crypto_portfolio_tracker/shared/widgets/common_empty_state.dart';
 import 'package:crypto_portfolio_tracker/shared/widgets/custom_input_text.dart';
 import 'package:crypto_portfolio_tracker/core/constants/image_constants.dart';
-import 'package:crypto_portfolio_tracker/core/constants/color_constants.dart';
-import 'package:hexcolor/hexcolor.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -23,7 +25,6 @@ class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController searchController = TextEditingController();
   final RxString searchQuery = "".obs;
   final FocusNode _focusNode = FocusNode();
-
   @override
   void initState() {
     super.initState();
@@ -33,19 +34,32 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return BaseWidget(
       screen: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomInputText(
-              labelText: "",
-              hintText: "Search by name or symbol",
-              suffixIconPath: ImageConstants.searchIcon,
-              isForSearch: true,
-              textEditingController: searchController,
-              focusNode: _focusNode,
-              onChanged: (value) => searchQuery.value = value.toLowerCase(),
-            ),
+          Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+
+              SizedBox(width: 8),
+              AppText("Coins ", fontSize: 22, fontWeight: FontWeight.w600),
+            ],
           ),
+
+          CustomInputText(
+            labelText: "",
+            hintText: "Search by name or symbol",
+            suffixIconPath: ImageConstants.searchIcon,
+            isForSearch: true,
+            textEditingController: searchController,
+            focusNode: _focusNode,
+            onChanged: (value) => searchQuery.value = value.toLowerCase(),
+          ),
+
           Expanded(
             child: Obx(() {
               if (controller.isLoading.value) {
@@ -80,7 +94,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ? "No coins available."
                       : "No results match your search.",
                   onTapButton: () {},
-                  stateScreenEmoji: "assets/empty.json",
+                  stateScreenEmoji: ImageConstants.noCoinsFoundLottieIcon,
                 );
               }
 
@@ -90,11 +104,34 @@ class _SearchScreenState extends State<SearchScreen> {
                 separatorBuilder: (_, __) => const SizedBox(height: 20),
                 itemBuilder: (context, index) {
                   final coin = filteredCoins[index];
-                  return CoinCard(coin: coin);
+                  return Obx(
+                    () => CoinSelectionCard(
+                      coin: coin,
+
+                      isSelected: controller.selectedCoins.contains(coin),
+                    ),
+                  );
                 },
               );
             }),
           ),
+          SizedBox(height: 2),
+
+          Obx(
+            () => CustomButton(
+              isDisabled: controller.selectedCoins.isEmpty,
+              onPressed: () async {
+                await controller.saveSelection();
+                AppViewUtils.showTopSnackbar(
+                  context,
+                  "Coins has been added succesfully",
+                );
+                Navigator.of(context).pop(true);
+              },
+              text: "Save",
+            ),
+          ),
+          SizedBox(height: 20),
         ],
       ),
     );

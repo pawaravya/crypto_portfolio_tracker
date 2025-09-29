@@ -6,11 +6,16 @@ import 'package:crypto_portfolio_tracker/shared/widgets/app_text.dart';
 import 'package:crypto_portfolio_tracker/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class AppViewUtils {
+    static bool _isSnackBarShowing = false;
+
   static getAssetImageSVG(
     String path, {
     double? height,
@@ -264,8 +269,6 @@ class AppViewUtils {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: 40),
-                    getAssetImageSVG(ImageConstants.sucessIcon),
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: AppText(
@@ -295,6 +298,14 @@ class AppViewUtils {
                         onTapbutton();
                       },
                       text: buttonText,
+                    ),
+                    SizedBox(height: 20),
+                    CustomButton(
+                      isSecondaryButton: true,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      text: "Cancel",
                     ),
                   ],
                 ),
@@ -480,16 +491,26 @@ class AppViewUtils {
       },
     );
   }
-
-  static void showTopSnackbar(
+static void showTopSnackbar(
     BuildContext context,
     String message, {
     bool isError = false,
     Duration duration = const Duration(milliseconds: 1500),
   }) {
-    
+    showTopSnackBar(
+      animationDuration: duration,
+      Overlay.of(context),
+      Material(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: isError ? Colors.red : HexColor(ColorConstants.themeColor),
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
+          child: AppText(message, color: HexColor(ColorConstants.whiteColor)),
+        ),
+      ),
+    );
   }
-
   static dimissKeyBoard(BuildContext context) {
     FocusScope.of(context).unfocus();
   }

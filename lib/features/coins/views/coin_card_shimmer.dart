@@ -7,7 +7,7 @@ class CoinCardShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 130,
+      height: 160,
       child: Card(
         elevation: 3,
         color: Colors.white,

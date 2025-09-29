@@ -9,13 +9,11 @@ class QuantityWidget extends StatefulWidget {
   final Function(int) onQuantityChanged;
   int selectedQuamtityValue;
   double rightPadding;
-  bool isDebouncerRequired;
   QuantityWidget({
     super.key,
     required this.quantity,
     required this.onQuantityChanged,
     this.rightPadding = 30,
-    this.isDebouncerRequired = false,
     required this.selectedQuamtityValue,
   });
 
@@ -26,46 +24,18 @@ class QuantityWidget extends StatefulWidget {
 class _QuantityWidgetState extends State<QuantityWidget> {
   int selectedValue = 1;
   Timer? _debounce;
-  late TextEditingController _controller;
-  bool _isUpdating = false;
-  Timer? _debounceQuantityTimer;
+
+  final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   bool _isCursorVisible = false;
-  @override
-  void initState() {
-    super.initState();
-    selectedValue = widget.selectedQuamtityValue;
-    _controller = TextEditingController(text: selectedValue.toString());
-    _focusNode.addListener(() {
-      setState(() {
-        _isCursorVisible = _focusNode.hasFocus;
-      });
-    });
-  }
 
   void updateQuantity(int newQuantity) {
     setState(() {
       selectedValue = newQuantity;
       _controller.text = newQuantity.toString();
     });
-    if (widget.isDebouncerRequired) {
-      if (_debounceQuantityTimer?.isActive ?? false) {
-        _debounceQuantityTimer!.cancel();
-      }
-      _debounceQuantityTimer = Timer(const Duration(milliseconds: 300), () {
-        if (_isUpdating) return;
 
-        setState(() {
-          _isUpdating = true;
-        });
-        widget.onQuantityChanged(selectedValue);
-        setState(() {
-          _isUpdating = false;
-        });
-      });
-    } else {
-      widget.onQuantityChanged(selectedValue);
-    }
+    widget.onQuantityChanged(selectedValue);
   }
 
   void _onQuantityChanged(String value) {
@@ -79,14 +49,8 @@ class _QuantityWidgetState extends State<QuantityWidget> {
       setState(() {
         selectedValue = newQuantity;
       });
-      if (widget.isDebouncerRequired) {
-        if (_debounce?.isActive ?? false) _debounce!.cancel();
-        _debounce = Timer(const Duration(seconds: 2), () {
-          updateQuantity(selectedValue);
-        });
-      } else {
-        updateQuantity(selectedValue);
-      }
+
+      updateQuantity(selectedValue);
     } else if (newQuantity > widget.quantity) {
       _controller.text = widget.quantity.toString();
       _controller.selection = TextSelection.fromPosition(
@@ -116,7 +80,7 @@ class _QuantityWidgetState extends State<QuantityWidget> {
           child: Container(
             // color: Colors.red,
             child: Padding(
-              padding: const EdgeInsets.only(top: 12.0, left: 10, bottom: 12),
+              padding: const EdgeInsets.only(top: 14.0, left: 0, bottom: 12),
               child: const Icon(Icons.remove, color: Colors.black, size: 18),
             ),
           ),
@@ -175,7 +139,7 @@ class _QuantityWidgetState extends State<QuantityWidget> {
             // color: Colors.green,
             child: Padding(
               padding: EdgeInsets.only(
-                top: 12.0,
+                top: 14.0,
                 right: widget.rightPadding,
                 bottom: 12,
               ),
