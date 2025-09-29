@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:crypto_portfolio_tracker/features/coins/model/coins_model.dart';
 import 'package:crypto_portfolio_tracker/features/coins/repositories/coins_repository.dart';
@@ -7,28 +6,25 @@ import 'package:crypto_portfolio_tracker/shared/app_logger.dart';
 import 'package:crypto_portfolio_tracker/shared/app_shared_preferences.dart';
 import 'package:get/get.dart';
 
-import 'package:get/get.dart';
 
 class CoinsController extends GetxController {
   var isLoading = false.obs;
-  var error = "".obs; // nullable error message
+  var error = "".obs; 
   var allCoins = <Coin>[].obs;
   var coinsInPortFolio = <Coin>[].obs;
   CoinsRepository coinsRepository = CoinsRepository();
   var selectedCoins = <Coin>[].obs;
   var isPrizesLoading = false.obs;
-  late Trie trie; // For fast prefix search
+  late Trie trie; 
 
   Future<void> fetchCoins() async {
   isLoading.value = true;
   error.value = "";
   try {
-    // Load saved portfolio first
     coinsInPortFolio.value = await AppSharedPreferences
         .customSharedPreferences
         .loadCoinsFromPortFolio();
 
-    // Fetch all coins
     final jsonData = await coinsRepository.fetchAllCoins();
 
     if (jsonData is List) {
@@ -38,14 +34,12 @@ class CoinsController extends GetxController {
 
       allCoins.value = fetchedCoins;
 
-      // Initialize Trie for fast search
       trie = Trie();
       for (var coin in fetchedCoins) {
         if (coin.name != null) trie.insert(coin.name!, coin);
         if (coin.symbol != null) trie.insert(coin.symbol!, coin);
       }
     } else {
-      // Handle unexpected response
       error.value = "Unexpected data format from server.";
       AppLogger.showErrorLogs("fetchCoins: Invalid response format");
     }

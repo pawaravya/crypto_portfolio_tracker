@@ -1,7 +1,6 @@
 import 'package:crypto_portfolio_tracker/core/constants/AppUrl.dart';
 import 'package:crypto_portfolio_tracker/core/services/network_api_services.dart';
 import 'package:crypto_portfolio_tracker/features/coins/model/coins_model.dart';
-import 'package:flutter/material.dart';
 
 class CoinsRepository {
   CoinsRepository._internal();

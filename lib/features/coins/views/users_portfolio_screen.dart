@@ -5,7 +5,6 @@ import 'package:crypto_portfolio_tracker/core/constants/image_constants.dart';
 import 'package:crypto_portfolio_tracker/core/constants/string_constants.dart';
 import 'package:crypto_portfolio_tracker/features/coins/model/enum_sort_options.dart';
 import 'package:crypto_portfolio_tracker/features/coins/view_models/coins_view_models.dart';
-import 'package:crypto_portfolio_tracker/features/coins/views/coin_selection_card.dart';
 import 'package:crypto_portfolio_tracker/features/coins/views/coin_card_shimmer.dart';
 import 'package:crypto_portfolio_tracker/features/coins/views/search_coins_screen.dart';
 import 'package:crypto_portfolio_tracker/shared/app_logger.dart';
@@ -402,10 +401,10 @@ class _UsersPortfolioScreenState extends State<UsersPortfolioScreen> {
   }
 
   @override
-void dispose() {
-  _priceUpdateTimer?.cancel();
-  _focusNode.dispose();
-  _searchTextEditingController.dispose();
-  super.dispose();
-}
+  void dispose() {
+    _priceUpdateTimer?.cancel();
+    _focusNode.dispose();
+    _searchTextEditingController.dispose();
+    super.dispose();
+  }
 }

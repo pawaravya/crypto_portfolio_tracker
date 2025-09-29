@@ -11,7 +11,6 @@ import 'package:crypto_portfolio_tracker/shared/widgets/base_widget.dart';
 import 'package:crypto_portfolio_tracker/shared/widgets/common_empty_state.dart';
 import 'package:crypto_portfolio_tracker/shared/widgets/custom_input_text.dart';
 import 'package:crypto_portfolio_tracker/core/constants/image_constants.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -82,7 +81,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 );
               }
 
-              // Use controller.searchCoins() or Trie-based search for fast prefix lookup
               final List<Coin> filteredCoins = controller.searchCoins(
                 searchQuery.value,
               );

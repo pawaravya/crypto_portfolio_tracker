@@ -3,8 +3,7 @@ import 'package:crypto_portfolio_tracker/features/coins/model/coins_model.dart';
 import 'package:crypto_portfolio_tracker/features/coins/view_models/coins_view_models.dart';
 import 'package:crypto_portfolio_tracker/features/coins/views/quantity_widget.dart';
 import 'package:crypto_portfolio_tracker/shared/widgets/app_text.dart';
-import 'package:crypto_portfolio_tracker/shared/widgets/custom_button.dart';
-import 'package:crypto_portfolio_tracker/shared/widgets/network_image_with_placeholder.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -47,19 +46,9 @@ class _CoidCardState extends State<CoinSelectionCard> {
                   coinsController.toggleSelection(widget.coin);
                 },
               ),
-              // ClipRRect(
-              //   borderRadius: BorderRadius.circular(8),
-              //   child: NetworkImageWithPlaceholder(
-              //     imageUrl: "",
-              //     placeholderAsset: "",
-              //     width: 112,
-              //     height: 112,
-              //     boxfit: BoxFit.contain,
-              //   ),
-              // ),
+             
               const SizedBox(width: 12),
 
-              // 🔹 Product Info
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

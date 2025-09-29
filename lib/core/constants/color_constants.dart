@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'dart:ui';
 
 class ColorConstants {
   ColorConstants._();

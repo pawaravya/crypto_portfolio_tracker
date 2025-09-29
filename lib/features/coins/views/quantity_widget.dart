@@ -78,7 +78,6 @@ class _QuantityWidgetState extends State<QuantityWidget> {
               ? () => updateQuantity(selectedValue - 1)
               : () {},
           child: Container(
-            // color: Colors.red,
             child: Padding(
               padding: const EdgeInsets.only(top: 14.0, left: 0, bottom: 12),
               child: const Icon(Icons.remove, color: Colors.black, size: 18),
@@ -90,7 +89,6 @@ class _QuantityWidgetState extends State<QuantityWidget> {
             _focusNode.requestFocus();
           },
           child: Container(
-            // color: Colors.amber,
             padding: const EdgeInsets.only(
               left: 10,
               right: 10,
@@ -119,8 +117,7 @@ class _QuantityWidgetState extends State<QuantityWidget> {
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,
                     focusedBorder: InputBorder.none,
-                    // contentPadding:
-                    //     EdgeInsets.symmetric(vertical: 5),
+                  
                   ),
                   textAlign: TextAlign.center,
                   onChanged: (value) {
@@ -136,7 +133,6 @@ class _QuantityWidgetState extends State<QuantityWidget> {
               ? () => updateQuantity(selectedValue + 1)
               : () {},
           child: Container(
-            // color: Colors.green,
             child: Padding(
               padding: EdgeInsets.only(
                 top: 14.0,
@@ -152,4 +148,3 @@ class _QuantityWidgetState extends State<QuantityWidget> {
   }
 }
 
-class Constants {}
