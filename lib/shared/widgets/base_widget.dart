@@ -51,7 +51,7 @@ class _BaseScreenState extends State<BaseWidget> {
               bottomNavigationBar: isConnected
                   ? widget.bottomNavigationBar
                   : null,
-              resizeToAvoidBottomInset: widget.isRequiredBottomInsect,
+              resizeToAvoidBottomInset: true,
               backgroundColor: Colors.grey.shade200,
               body: Padding(
                 padding: EdgeInsets.symmetric(horizontal: widget.sidePadding),

@@ -19,11 +19,10 @@ class NetworkAPIServices extends BaseApiServices {
 
   @override
   Future<dynamic> generateGetAPIResponse(
-    BuildContext context,
     String uri,
   ) async {
     if (!_internetHelper.isInternetConnected.value) {
-      return _handleNoInternetError(context);
+      return _handleNoInternetError();
     }
     try {
       AppLogger.showInfoLogs('GET: $uri');
@@ -67,9 +66,9 @@ class NetworkAPIServices extends BaseApiServices {
     }
   }
 
-  dynamic _handleNoInternetError(BuildContext context) {
+  dynamic _handleNoInternetError() {
     AppLogger.showErrorLogs('No internet connection.');
-    AppViewUtils.showTopSnackbar(context, StringConstants.noInternetSubText);
+    AppViewUtils.showTopSnackbar(Get.context! , StringConstants.noInternetSubText);
     return {'error': 'No internet connection'};
   }
 

@@ -9,9 +9,9 @@ class CoinsRepository {
 
   factory CoinsRepository() => _instance;
 
-  Future<dynamic> fetchAllCoins(BuildContext context) async {
+  Future<dynamic> fetchAllCoins() async {
     return await _networkAPIServices.generateGetAPIResponse(
-      context,
+      
       Appurl.getAllCoinsListUrl,
     );
   }

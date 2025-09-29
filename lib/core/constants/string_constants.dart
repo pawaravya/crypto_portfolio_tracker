@@ -11,6 +11,6 @@ class StringConstants {
   static const String noText = "NO";
   static const String logOut = "Logout";
   static const String yesText = "Yes";
-  static const String appName = "E-Commerse App";
+  static const String appName = "Crypto Portfolio Tracker";
   static const String somethingWentWrongMessage = "Something went wrong";
 }

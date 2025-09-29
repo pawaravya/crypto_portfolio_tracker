@@ -1,6 +1,11 @@
+import 'package:crypto_portfolio_tracker/features/authentication/views/splash_screen.dart';
+import 'package:crypto_portfolio_tracker/shared/app_shared_preferences.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await AppSharedPreferences.customSharedPreferences.initPrefs();
   runApp(const MyApp());
 }
 
@@ -9,11 +14,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen());
   }
 }

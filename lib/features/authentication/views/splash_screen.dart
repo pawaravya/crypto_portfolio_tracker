@@ -1,4 +1,5 @@
 import 'package:crypto_portfolio_tracker/core/constants/string_constants.dart';
+import 'package:crypto_portfolio_tracker/features/coins/views/users_portfolio_screen.dart';
 import 'package:crypto_portfolio_tracker/shared/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -31,13 +32,13 @@ class _SplashScreenState extends State<SplashScreen>
 
   Future<void> navigateScreenBasedOnCondition() async {
     await Future.delayed(const Duration(seconds: 3));
-    // Navigator.of(context).pushReplacement(
-    //   MaterialPageRoute(
-    //     builder: (context) {
-    //       return null;
-    //     },
-    //   ),
-    // );
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) {
+          return UsersPortfolioScreen();
+        },
+      ),
+    );
   }
 
   @override

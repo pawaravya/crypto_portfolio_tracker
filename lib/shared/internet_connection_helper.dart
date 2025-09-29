@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:e_commerse_app/shared/app_logger.dart';
+import 'package:crypto_portfolio_tracker/shared/app_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:get/get.dart';

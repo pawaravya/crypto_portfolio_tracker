@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:crypto_portfolio_tracker/features/coins/model/coins_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSharedPreferences {
@@ -7,13 +8,12 @@ class AppSharedPreferences {
 
   SharedPreferences? _prefs;
   AppSharedPreferences._internal();
+  static const _coinListKey = "coin_list";
 
-  /// Must be called before using any method
   Future<void> initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  /// Save any supported type
   Future<void> saveValue<T>(String key, T value) async {
     if (_prefs == null) throw Exception('SharedPreferences not initialized');
 
@@ -32,10 +32,8 @@ class AppSharedPreferences {
     }
   }
 
-  /// Get any supported type
   T? getValue<T>(String key) {
     if (_prefs == null) throw Exception('SharedPreferences not initialized');
-
     if (T == String) {
       return _prefs!.getString(key) as T?;
     } else if (T == int) {
@@ -61,5 +59,17 @@ class AppSharedPreferences {
   Future<void> clearSharedPreference() async {
     if (_prefs == null) throw Exception('SharedPreferences not initialized');
     await _prefs!.clear();
+  }
+
+  Future<void> saveCoinsToPortFolio(List<Coin> coins) async {
+    final jsonList = coins.map((c) => c.toJson()).toList();
+    await saveValue(_coinListKey, jsonEncode(jsonList));
+  }
+
+  Future<List<Coin>> loadCoinsFromPortFolio() async {
+    final jsonStr = getValue<String>(_coinListKey);
+    if (jsonStr == null) return [];
+    final List decoded = jsonDecode(jsonStr);
+    return decoded.map((e) => Coin.fromJson(e)).toList();
   }
 }
