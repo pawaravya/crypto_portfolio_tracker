@@ -20,7 +20,7 @@ Users can add coins, view live prices, calculate portfolio value, and manage the
 
 1. Clone the repository:
    ```bash
-   git clone <your-repo-link>
+   git clone https://github.com/pawaravya/crypto_portfolio_tracker.git
 Navigate to the project folder:
 
 cd crypto_portfolio_tracker
@@ -71,3 +71,13 @@ shared_preferences
 get
 
 top_snackbar_flutter
+
+---
+Demo video 
+https://drive.google.com/file/d/1QPyuVyxBjtxmbw5rhEp27zxf1v0sMnyQ/view?usp=sharing
+---
+
+Apk 
+https://drive.google.com/file/d/1lrfiri-CpjSF4PC5NdVfXaY2V5US-p-U/view?usp=sharing
+---
+
