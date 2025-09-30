@@ -87,6 +87,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
               if (filteredCoins.isEmpty) {
                 return CommonEmptyState(
+                  isButtonRequired: false,
                   stateScreenHeading: "No Coins Found",
                   stateScreenSubHeading: searchQuery.value.isEmpty
                       ? "No coins available."

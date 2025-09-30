@@ -68,12 +68,12 @@ class _UsersPortfolioScreenState extends State<UsersPortfolioScreen> {
   Widget build(BuildContext context) {
     return BaseWidget(
       handleOnWillPop: () async {
-        final isExit = AppViewUtils.showAppExitConfirmation(
-          context,
-          () => SystemNavigator.pop(),
-        );
-        _focusNode.unfocus();
-        return isExit;
+        // final isExit = AppViewUtils.showAppExitConfirmation(
+        //   context,
+        //   () => SystemNavigator.pop(),
+        // );
+        // _focusNode.unfocus();
+        return true;
       },
       screen: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,8 +85,20 @@ class _UsersPortfolioScreenState extends State<UsersPortfolioScreen> {
               AppText(
                 "Welcome, User",
                 fontSize: 22,
+                maxLines: 1,
                 fontWeight: FontWeight.w600,
               ),
+              Obx(() {
+                return AppText(
+                  "\$ ${coinsController.coinsInPortFolio.fold(0.0, (sum, coin) {
+                    final coinValue = (coin.price ?? 0) * (coin.selectedQuantuty ?? 0);
+                    return sum + coinValue;
+                  }).toStringAsFixed(4)}",
+                  fontSize: 20,
+                  maxLines: 1,
+                  fontWeight: FontWeight.w600,
+                );
+              }),
             ],
           ),
           SizedBox(height: 10),
