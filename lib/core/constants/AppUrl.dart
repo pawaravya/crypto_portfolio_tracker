@@ -5,7 +5,6 @@ class Appurl {
     return '$_BASEURL/$endpoint';
   }
 
-
   static String getAllCoinsListUrl = _getUrl("coins/list");
   static String fetchPrizes = _getUrl("simple/") ;
 
